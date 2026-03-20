@@ -23,19 +23,38 @@
   </script>
   <style>
     *{font-family:'Work Sans',sans-serif}
-    body{background:#f0f4f8;color:#334155;overflow-x:hidden;position:relative}
+    body{background:#e8edf2;color:#334155;overflow-x:hidden;position:relative}
+    /* ---- PHOTOREALISTIC PEGBOARD ---- */
+    /* Layer 0: board surface — warm grey with subtle noise via repeating gradients */
     body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       background-image:
-        radial-gradient(circle at 16px 16px, rgba(45,58,62,0.18) 1.2px, transparent 1.2px),
-        radial-gradient(circle at 16px 16px, rgba(45,58,62,0.07) 2.4px, transparent 2.4px),
-        radial-gradient(circle at 16px 16px, rgba(255,255,255,0.12) 3px, transparent 3px);
-      background-size:32px 32px;
-      background-position:0 0, 0 0, 0 0}
+        /* L1: hole void — dark center that reads as depth/cavity */
+        radial-gradient(circle at 16px 16px, #3a4448 0px, #455055 1px, transparent 1.8px),
+        /* L2: inner shadow ring — the dark edge where the hole meets the board face */
+        radial-gradient(circle at 16px 16px, rgba(35,46,49,0.55) 1.8px, rgba(35,46,49,0.25) 2.6px, transparent 3px),
+        /* L3: chamfer / bevel ring — lighter ring catching top-light, gives 3D punch */
+        radial-gradient(circle at 15.6px 15.6px, transparent 2.6px, rgba(255,255,255,0.18) 2.8px, rgba(255,255,255,0.08) 3.6px, transparent 4px),
+        /* L4: bottom shadow cast — soft shadow below each hole (light comes from top-left) */
+        radial-gradient(circle at 16.6px 17px, transparent 2.2px, rgba(35,46,49,0.10) 3px, rgba(35,46,49,0.04) 4.5px, transparent 5.5px),
+        /* L5: ambient occlusion halo — very subtle darkening around each hole */
+        radial-gradient(circle at 16px 16px, transparent 4px, rgba(45,58,62,0.03) 5px, transparent 7px),
+        /* L6: board surface fibre texture — horizontal micro-grain */
+        repeating-linear-gradient(92deg, transparent 0px, rgba(180,175,165,0.04) 1px, transparent 2px, transparent 6px),
+        /* L7: board surface fibre texture — vertical micro-grain */
+        repeating-linear-gradient(2deg, transparent 0px, rgba(160,155,145,0.03) 1px, transparent 2px, transparent 8px),
+        /* L8: board base colour with warmth gradient */
+        linear-gradient(168deg, #e4e8ec 0%, #dde2e7 25%, #d8dde3 50%, #dce1e6 75%, #e2e6eb 100%);
+      background-size:32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 6px 6px, 8px 8px, 100% 100%;
+      background-position:0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0}
+    /* Layer 1: environmental lighting overlay — soft vignette and depth */
     body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       background:
-        linear-gradient(180deg,rgba(240,244,248,0.3) 0%,rgba(232,238,245,0.5) 50%,rgba(226,232,240,0.3) 100%),
-        repeating-linear-gradient(0deg,transparent,transparent 31px,rgba(45,58,62,0.015) 31px,rgba(45,58,62,0.015) 32px),
-        repeating-linear-gradient(90deg,transparent,transparent 31px,rgba(45,58,62,0.015) 31px,rgba(45,58,62,0.015) 32px)}
+        /* Top-down studio light — brighter center, darker edges */
+        radial-gradient(ellipse 80% 60% at 50% 35%, rgba(255,255,255,0.08) 0%, transparent 70%),
+        /* Subtle vertical light falloff — top lighter, bottom slightly darker */
+        linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 30%, rgba(35,46,49,0.04) 100%),
+        /* Edge vignette — very subtle darkening at edges */
+        radial-gradient(ellipse 90% 90% at 50% 50%, transparent 50%, rgba(35,46,49,0.06) 100%)}
     body>*{position:relative;z-index:1}
     .section-card{background:#fff;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 4px 6px -1px rgb(0 0 0/0.05)}
 
@@ -56,32 +75,63 @@
     .service-card{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;transition:all .3s;background:#fff}
     .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(45,58,62,.15);border-color:#A1978A}
 
-    /* ---- PEGBOARD CLIP CONNECTOR ---- */
-    .peg-clip{position:relative;padding-top:22px}
-    /* Vertical peg stem — the metal rod that inserts into the pegboard hole */
-    .peg-clip::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);
-      width:6px;height:26px;
-      background:linear-gradient(90deg,#747a6c 0%,#A1978A 35%,#d5d1c7 50%,#A1978A 65%,#747a6c 100%);
-      border-radius:3px;
-      box-shadow:1px 2px 3px rgba(44,62,80,0.2),inset 0 1px 0 rgba(255,255,255,0.4);
+    /* ---- PEGBOARD HOOK CONNECTOR — brushed metal wire hook ---- */
+    .peg-clip{position:relative;padding-top:28px}
+    /* Vertical peg stem — thick brushed-steel rod inserted into pegboard hole */
+    .peg-clip::before{content:'';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+      width:8px;height:34px;
+      background:linear-gradient(90deg,
+        #5c6259 0%, #7a7e72 12%, #9a9e90 25%, #c2c0b6 40%, #dedad0 50%,
+        #c2c0b6 60%, #9a9e90 75%, #7a7e72 88%, #5c6259 100%);
+      border-radius:4px;
+      box-shadow:
+        2px 3px 6px rgba(35,46,49,0.3),
+        -1px 0 2px rgba(35,46,49,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.5),
+        inset 0 -1px 2px rgba(35,46,49,0.15),
+        inset 2px 0 4px rgba(255,255,255,0.08);
       z-index:3}
-    /* Hook plate — the wider bracket that grips the card from above */
-    .peg-clip::after{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
-      width:28px;height:8px;
-      background:linear-gradient(180deg,#B5AD98 0%,#A1978A 50%,#8C9483 100%);
-      border-radius:2px 2px 4px 4px;
-      box-shadow:0 2px 4px rgba(44,62,80,0.15),0 1px 1px rgba(44,62,80,0.1),inset 0 1px 0 rgba(255,255,255,0.25);
+    /* Hook bracket — the wider grip plate that holds the card, with beveled edges */
+    .peg-clip::after{content:'';position:absolute;top:16px;left:50%;transform:translateX(-50%);
+      width:36px;height:10px;
+      background:linear-gradient(180deg,
+        #d5d1c7 0%, #c4bfb2 15%, #B5AD98 35%, #A1978A 55%, #8C9483 80%, #7a8074 100%);
+      border-radius:3px 3px 6px 6px;
+      box-shadow:
+        0 3px 6px rgba(35,46,49,0.2),
+        0 1px 2px rgba(35,46,49,0.15),
+        0 6px 12px -2px rgba(35,46,49,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 1px rgba(35,46,49,0.12),
+        inset 2px 0 3px rgba(255,255,255,0.1),
+        inset -2px 0 3px rgba(35,46,49,0.08);
       z-index:3}
 
-    /* Pegboard service card — hung look with depth */
+    /* Pegboard service card — hung from hook with realistic depth + layered shadows */
     .svc-bullet-card.peg-hung{
       position:relative;
-      box-shadow:0 2px 4px rgba(44,62,80,0.08),0 4px 8px rgba(44,62,80,0.06),0 8px 16px rgba(44,62,80,0.04),0 16px 32px rgba(44,62,80,0.02);
-      transition:all .35s cubic-bezier(.4,0,.2,1);
+      background:#fff;
+      box-shadow:
+        /* contact shadow — tight, dark, simulates card sitting slightly off board */
+        0 1px 2px rgba(35,46,49,0.12),
+        /* mid-diffusion shadow */
+        0 4px 8px -1px rgba(35,46,49,0.08),
+        /* directional shadow — top-left light source */
+        2px 6px 16px -2px rgba(35,46,49,0.07),
+        /* environmental / ambient shadow */
+        0 12px 32px -4px rgba(35,46,49,0.05),
+        /* soft far shadow for floating feel */
+        0 20px 48px -8px rgba(35,46,49,0.03);
+      transition:all .4s cubic-bezier(.25,.46,.45,.94);
       transform-origin:top center}
     .svc-bullet-card.peg-hung:hover{
-      transform:translateY(-6px) scale(1.01);
-      box-shadow:0 6px 12px rgba(44,62,80,0.1),0 12px 24px rgba(44,62,80,0.08),0 24px 48px rgba(44,62,80,0.05);
+      transform:translateY(-8px) scale(1.012) rotate(-0.3deg);
+      box-shadow:
+        0 2px 4px rgba(35,46,49,0.14),
+        0 8px 16px -2px rgba(35,46,49,0.10),
+        4px 12px 28px -4px rgba(35,46,49,0.09),
+        0 24px 52px -8px rgba(35,46,49,0.06),
+        0 36px 72px -12px rgba(35,46,49,0.04);
       border-color:#A1978A}
 
     /* Pegboard services wider grid */
