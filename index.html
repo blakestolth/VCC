@@ -106,6 +106,32 @@
 
     .cfg-price-tag{background:linear-gradient(135deg,#2D3A3E 0%,#4A6E7F 100%);border-radius:16px;padding:24px;color:#fff;position:relative;overflow:hidden}
     .cfg-price-tag::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(139,59,45,.15) 0%,transparent 70%)}
+
+    /* Quote form wizard */
+    .quote-step{display:none}
+    .quote-step.active{display:block}
+    .step-indicator{display:flex;gap:4px;margin-bottom:24px}
+    .step-dot{flex:1;height:4px;border-radius:2px;background:#e2e8f0;transition:all .3s}
+    .step-dot.done{background:#8B3B2D}
+    .step-dot.current{background:#2D3A3E}
+    .type-card{border:2px solid #e2e8f0;border-radius:12px;padding:24px;cursor:pointer;transition:all .25s;background:#fff;text-align:center}
+    .type-card:hover{border-color:#B5AD98;background:#f4f3f0}
+    .type-card.selected{border-color:#2D3A3E;background:#e8edef;box-shadow:0 4px 12px -2px rgba(45,58,62,.15)}
+    .service-option{border:2px solid #e2e8f0;border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;background:#fff}
+    .service-option:hover{border-color:#B5AD98}
+    .service-option.selected{border-color:#8B3B2D;background:#f5ebe8}
+    .size-option{border:2px solid #e2e8f0;border-radius:10px;padding:16px;cursor:pointer;transition:all .2s;background:#fff;text-align:center}
+    .size-option:hover{border-color:#B5AD98}
+    .size-option.selected{border-color:#2D3A3E;background:#f4f3f0}
+    .timeline-pill{border:1.5px solid #e2e8f0;border-radius:20px;padding:8px 16px;cursor:pointer;transition:all .2s;background:#fff;font-size:12px;font-weight:700}
+    .timeline-pill:hover{border-color:#B5AD98}
+    .timeline-pill.selected{border-color:#2D3A3E;background:#2D3A3E;color:#fff}
+    .estimate-reveal{animation:slideUp .5s ease}
+    @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .sub-nav{display:flex;gap:6px;padding:8px 0;border-bottom:1px solid #e2e8f0;margin-bottom:16px}
+    .sub-nav-btn{padding:6px 14px;font-size:12px;font-weight:700;border-radius:20px;cursor:pointer;transition:all .2s;border:1.5px solid transparent;color:#64748b;background:transparent}
+    .sub-nav-btn:hover{color:#2D3A3E;background:#f4f3f0}
+    .sub-nav-btn.active{background:#2D3A3E;color:#fff;border-color:#2D3A3E}
   </style>
 </head>
 <body>
@@ -124,7 +150,7 @@
       <div class="flex items-center justify-between">
         <!-- Logo — white on transparent -->
         <a href="#" class="flex-shrink-0 block" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
-          <img src="images/logo-vcc.png" alt="VIC Coast Contracting LTD — Affordable Housing" class="h-[7rem] w-auto">
+          <div class="bg-white rounded-2xl p-1.5 shadow-sm"><img src="images/logo-vcc.png" alt="VIC Coast Contracting LTD — Affordable Housing" class="h-[5.5rem] w-auto"></div>
         </a>
 
         <!-- Section Tabs as Nav (desktop) -->
@@ -167,12 +193,290 @@
     <!-- ==================================================================== -->
     <div id="contracting" class="section-content">
 
-      <!-- ── PROJECTS FIRST ── -->
-      <section class="section-card p-6 md:p-10 fade-up" id="projects">
+      <!-- ── SUB-MENU NAV BAR ── -->
+      <div class="sub-nav sticky top-16 bg-white z-50 px-6 md:px-10 py-3">
+        <button class="sub-nav-btn active" onclick="scrollToAnchor('quote-form')">Get a Quote</button>
+        <button class="sub-nav-btn" onclick="scrollToAnchor('services-section')">Services</button>
+        <button class="sub-nav-btn" onclick="scrollToAnchor('projects')">Projects</button>
+      </div>
+
+      <!-- ── SMART MULTI-STEP QUOTE FORM ── -->
+      <section class="section-card p-5 md:p-8 fade-up mt-6" id="quote-form">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-black text-navy-700 tracking-tight">Get Your Free Estimate</h2>
+          <p class="text-slate-500 text-sm mt-2">Answer a few questions and we'll give you a rough project cost in under 60 seconds.</p>
+        </div>
+
+        <div class="step-indicator">
+          <div class="step-dot current"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+        </div>
+
+        <form id="smartQuoteForm" name="smart-quote" method="POST" data-netlify="true" class="space-y-6">
+          <input type="hidden" name="form-name" value="smart-quote">
+          <input type="hidden" id="q-type-hidden" name="project_type" value="">
+          <input type="hidden" id="q-service-hidden" name="service_type" value="">
+          <input type="hidden" id="q-size-hidden" name="project_size" value="">
+          <input type="hidden" id="q-timeline-hidden" name="timeline" value="">
+
+          <!-- STEP 1: Who are you? -->
+          <div class="quote-step active" id="quoteStep1">
+            <h3 class="text-lg font-bold text-navy-700 mb-4">Who are you?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="type-card" onclick="quoteSelectType('homeowner')">
+                <div class="text-3xl mb-2">🏠</div>
+                <h4 class="font-bold text-navy-700 mb-1">Homeowner</h4>
+                <p class="text-xs text-slate-600">Renovations, repairs, carpentry, and home improvements</p>
+              </div>
+              <div class="type-card" onclick="quoteSelectType('business')">
+                <div class="text-3xl mb-2">🏢</div>
+                <h4 class="font-bold text-navy-700 mb-1">Business</h4>
+                <p class="text-xs text-slate-600">Tenant improvements, commercial builds, property maintenance</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2: What do you need? -->
+          <div class="quote-step" id="quoteStep2">
+            <h3 class="text-lg font-bold text-navy-700 mb-4">What do you need?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" id="homeownerServices" style="display:none">
+              <div class="service-option" onclick="quoteSelectService('kitchen-bath')">Kitchen &amp; Bathroom Renovation</div>
+              <div class="service-option" onclick="quoteSelectService('general-reno')">General Home Renovation</div>
+              <div class="service-option" onclick="quoteSelectService('carpentry')">Finishing Carpentry &amp; Trim</div>
+              <div class="service-option" onclick="quoteSelectService('millwork')">Custom Millwork &amp; Cabinetry</div>
+              <div class="service-option" onclick="quoteSelectService('maintenance')">Home Maintenance &amp; Repairs</div>
+              <div class="service-option" onclick="quoteSelectService('other')">Other</div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" id="businessServices" style="display:none">
+              <div class="service-option" onclick="quoteSelectService('tenant-improvement')">Tenant Improvement / Build-Out</div>
+              <div class="service-option" onclick="quoteSelectService('commercial-reno')">Commercial Renovation</div>
+              <div class="service-option" onclick="quoteSelectService('maintenance-program')">Property Maintenance Program</div>
+              <div class="service-option" onclick="quoteSelectService('commercial-millwork')">Custom Millwork &amp; Fixtures</div>
+              <div class="service-option" onclick="quoteSelectService('bin-waste')">Bin &amp; Waste Services</div>
+              <div class="service-option" onclick="quoteSelectService('consulting')">Management &amp; Consulting</div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Project Details -->
+          <div class="quote-step" id="quoteStep3">
+            <h3 class="text-lg font-bold text-navy-700 mb-4">Project Details</h3>
+            <div class="space-y-6">
+              <div>
+                <label class="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-3">Project Size</label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div class="size-option" onclick="quoteSelectSize('small')">
+                    <h4 class="font-bold text-navy-700 mb-1">Small</h4>
+                    <p class="text-xs text-slate-600">Single room, minor work</p>
+                    <p class="text-xs text-accent-500 font-bold mt-1">$2K–10K</p>
+                  </div>
+                  <div class="size-option" onclick="quoteSelectSize('medium')">
+                    <h4 class="font-bold text-navy-700 mb-1">Medium</h4>
+                    <p class="text-xs text-slate-600">Multiple rooms, moderate scope</p>
+                    <p class="text-xs text-accent-500 font-bold mt-1">$10K–50K</p>
+                  </div>
+                  <div class="size-option" onclick="quoteSelectSize('large')">
+                    <h4 class="font-bold text-navy-700 mb-1">Large</h4>
+                    <p class="text-xs text-slate-600">Full property, major build</p>
+                    <p class="text-xs text-accent-500 font-bold mt-1">$50K–200K+</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-3">Timeline</label>
+                <div class="flex flex-wrap gap-2">
+                  <button type="button" class="timeline-pill" onclick="quoteSelectTimeline('ASAP')">ASAP</button>
+                  <button type="button" class="timeline-pill" onclick="quoteSelectTimeline('1-3 Months')">1–3 Months</button>
+                  <button type="button" class="timeline-pill" onclick="quoteSelectTimeline('3-6 Months')">3–6 Months</button>
+                  <button type="button" class="timeline-pill" onclick="quoteSelectTimeline('Just Planning')">Just Planning</button>
+                </div>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-2">Brief Description (optional)</label>
+                <textarea id="q-description" name="description" rows="2" placeholder="Tell us about your project..." class="form-field" style="height:auto"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4: Contact Info -->
+          <div class="quote-step" id="quoteStep4">
+            <h3 class="text-lg font-bold text-navy-700 mb-4">Your Contact Info</h3>
+            <div class="space-y-3">
+              <input type="text" id="q-name" name="name" placeholder="Full Name" required class="form-field">
+              <input type="tel" id="q-phone" name="phone" placeholder="Phone Number" required class="form-field">
+              <input type="email" id="q-email" name="email" placeholder="Email Address" required class="form-field">
+              <div>
+                <label class="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-2">Preferred Contact</label>
+                <div class="flex gap-2">
+                  <label class="flex items-center gap-2 flex-1 p-3 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-accent-400 has-[:checked]:border-accent-400 has-[:checked]:bg-accent-50">
+                    <input type="radio" name="contact_pref" value="call" checked class="hidden"> 📞 Call Me
+                  </label>
+                  <label class="flex items-center gap-2 flex-1 p-3 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-accent-400 has-[:checked]:border-accent-400 has-[:checked]:bg-accent-50">
+                    <input type="radio" name="contact_pref" value="email" class="hidden"> 📧 Email Me
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 5: Result -->
+          <div class="quote-step" id="quoteStep5">
+            <div class="estimate-reveal space-y-6">
+              <div class="text-center">
+                <h3 class="text-2xl font-black text-navy-700 mb-2">Your Rough Estimate</h3>
+              </div>
+              <div class="bg-accent-50 border-2 border-accent-200 rounded-xl p-6 text-center">
+                <div class="text-sm text-accent-600 font-bold uppercase tracking-wider mb-2">Estimated Range</div>
+                <div class="text-4xl font-black text-accent-600 mb-1">
+                  <span id="estimateLow">$5,000</span> – <span id="estimateHigh">$50,000</span>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-wrap gap-2 justify-center">
+                  <span class="bg-slate-100 text-navy-700 text-xs font-bold px-3 py-1.5 rounded-full">Service: <span id="estService">Kitchen Reno</span></span>
+                  <span class="bg-slate-100 text-navy-700 text-xs font-bold px-3 py-1.5 rounded-full">Scope: <span id="estSize">Medium</span></span>
+                  <span class="bg-slate-100 text-navy-700 text-xs font-bold px-3 py-1.5 rounded-full">Timeline: <span id="estTimeline">Flexible</span></span>
+                </div>
+              </div>
+              <div class="bg-earth-50 rounded-lg p-4 text-center">
+                <p class="text-xs text-slate-600"><strong>Note:</strong> This is an initial estimate. Final pricing requires a site visit.</p>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <button type="button" class="btn-primary justify-center text-sm py-3" onclick="window.location.href='tel:+12508822253'">📞 Schedule a Call</button>
+                <button type="button" class="btn-secondary justify-center text-sm py-3" onclick="quoteSubmitEmail()">📧 We'll Be in Touch</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation buttons (shown in steps 1-4) -->
+          <div class="flex gap-3 justify-between" id="quoteNavButtons">
+            <button type="button" class="btn-secondary text-sm py-2.5 px-6" onclick="quoteBack()" style="display:none" id="backBtn">Back</button>
+            <div class="flex-1"></div>
+            <button type="button" class="btn-primary text-sm py-2.5 px-6" onclick="quoteGoTo(quoteStep + 1)" id="nextBtn">Next</button>
+          </div>
+          <button type="button" class="btn-primary w-full justify-center text-sm py-3" onclick="quoteSubmit(event)" style="display:none" id="submitBtn">Calculate Estimate &amp; Get Quote</button>
+        </form>
+      </section>
+
+      <!-- ── SERVICES VISUAL ── -->
+      <section class="section-card p-5 md:p-8 fade-up mt-6 scroll-mt-40" id="services-section">
+        <div class="text-center mb-8">
+          <h3 class="text-xl md:text-2xl font-black text-navy-700 tracking-tight mb-4">Our Services</h3>
+        </div>
+
+        <!-- Two-tab toggle -->
+        <div class="flex gap-2 justify-center mb-8">
+          <button class="svc-toggle-btn active bg-navy-700 text-white px-6 py-2 rounded-full font-bold text-sm" onclick="toggleServices('homeowner')">For Homeowners</button>
+          <button class="svc-toggle-btn text-slate-600 px-6 py-2 rounded-full font-bold text-sm" onclick="toggleServices('business')">For Businesses</button>
+        </div>
+
+        <!-- For Homeowners -->
+        <div id="homeownerSvcs" class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Renovations</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Kitchen, bathroom, and full home remodels with premium finishes</p>
+          </div>
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Finishing Carpentry</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Trim, baseboards, crown moulding, doors, and custom detailing</p>
+          </div>
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Custom Millwork</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Built-in shelving, cabinetry, wall panels, and specialty pieces</p>
+          </div>
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Maintenance</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Seasonal inspections, repairs, and preventative upkeep</p>
+          </div>
+        </div>
+
+        <!-- For Businesses -->
+        <div id="businessSvcs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" style="display:none">
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Tenant Improvements</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Restaurant, retail, office, and industrial build-outs</p>
+          </div>
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Commercial Renovations</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Layout changes, code upgrades, and full remodels</p>
+          </div>
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Management &amp; Consulting</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Project oversight, trade coordination, and compliance</p>
+          </div>
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Custom Millwork &amp; Fixtures</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Reception desks, display cases, and commercial cabinetry</p>
+          </div>
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Bin &amp; Waste Services</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Construction debris, demolition waste, and hazardous disposal</p>
+          </div>
+          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
+            <h4 class="font-extrabold text-navy-700 text-base mb-2">Maintenance Programs</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Scheduled property upkeep and emergency repairs</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── DARK HERO BANNER ── -->
+      <section class="section-card overflow-hidden mt-6 fade-up">
+        <!-- Dark intro banner merging the hero tagline -->
+        <div class="relative bg-navy-700 px-6 py-10 md:px-10 md:py-14">
+          <div class="absolute inset-0 opacity-10"><svg width="100%" height="100%"><defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#fff" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g)"/></svg></div>
+          <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
+                <span class="w-2 h-2 bg-accent-400 rounded-full animate-pulse"></span>
+                <span class="text-white/80 text-xs font-bold uppercase tracking-wider">Family Owned · 20+ Years</span>
+              </div>
+              <h2 class="text-2xl md:text-3xl font-black text-white leading-tight tracking-tight mb-3">Victoria's #1 Tenant Improvement Contractor</h2>
+              <p class="text-white/70 text-sm leading-relaxed max-w-md">Family-owned and operated with over 20 years experience in multi-unit residential, retail &amp; commercial construction. We handle trade coordination, scheduling, safety compliance, documentation and more.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="text-center"><div class="text-2xl font-black text-accent-400">20+</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Years</div></div>
+              <div class="text-center"><div class="text-2xl font-black text-accent-400">7</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Services</div></div>
+              <div class="text-center"><div class="text-2xl font-black text-accent-400">9</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Home Models</div></div>
+              <div class="text-center"><div class="text-2xl font-black text-accent-400">BC</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Province-Wide</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services grid — prominent, with full photos & descriptions -->
+        <div class="p-5 md:p-8">
+          <div class="text-center mb-8">
+            <h3 class="text-xl md:text-2xl font-black text-navy-700 tracking-tight">What We Build &amp; How We Deliver</h3>
+            <p class="text-slate-500 text-sm mt-1 max-w-2xl mx-auto">Fast, reliable construction services for commercial property owners, developers, and incoming tenants.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Management & Consulting -->
+            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/management.jpg" alt="Management and Consulting" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Management &amp; Consulting</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Experienced oversight and consulting for owners, developers, and builders on retail tenant improvements, commercial projects, and multi-unit renovations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Project Oversight</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Trade Coordination</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Scheduling</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Safety Compliance</span></div></div></div>
+            <!-- Tenant Improvements -->
+            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/tenant-improvements.jpg" alt="Tenant Improvements" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Tenant Improvements</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Fast, reliable tenant improvements for restaurants, retail, office, medical, and industrial spaces. From basic refreshes to complete build-outs with tight lease deadlines.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Demolition &amp; Reconfig</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Framing &amp; Drywall</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">T-Bar Ceilings</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Flooring &amp; Millwork</span></div></div></div>
+            <!-- Renovations -->
+            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/renovations.jpg" alt="Renovations" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Renovations</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Full interior remodels, layout changes, cosmetic upgrades, structural updates, and code-compliant improvements with precision planning and minimal disruption to tenants or operations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Kitchens &amp; Bathrooms</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Framing &amp; Layout</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Drywall &amp; Paint</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Heritage Spaces</span></div></div></div>
+            <!-- Finishing Carpentry -->
+            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/finishing-carpentry.jpg" alt="Finishing Carpentry" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Finishing Carpentry</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Trim, baseboards, crown moulding, doors, casings, and custom detailing with exact measurements, clean miters, and seamless integration to elevate interiors.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Trim &amp; Baseboards</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Crown Moulding</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Door &amp; Window Casings</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Custom Detailing</span></div></div></div>
+          </div>
+
+          <!-- Row 2: remaining 3 services -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-5">
+            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/maintenance.jpg" alt="Maintenance" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Maintenance</h4><p class="text-xs text-slate-500 leading-relaxed">Preventative inspections, seasonal upkeep, general repairs, safety &amp; code checks, and trade coordination. Local. Reliable. On Call.</p></div></div>
+            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/millwork.jpg" alt="Custom Millwork" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Custom Millwork</h4><p class="text-xs text-slate-500 leading-relaxed">Custom trim &amp; profiles, wall panels, built-in shelving, door &amp; window casings, reception desks — precise fits, clean lines, tight joints.</p></div></div>
+            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/bin-service.jpg" alt="Bin &amp; Waste Services" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Bin &amp; Waste Services</h4><p class="text-xs text-slate-500 leading-relaxed">Construction waste, demolition debris, drywall disposal, and regulated waste streams. Hazardous materials managed with licensed providers.</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── PROJECTS SECTION ── -->
+      <section class="section-card p-5 md:p-8 fade-up mt-6 scroll-mt-40" id="projects">
         <div class="text-center mb-8">
           <div class="text-xs font-bold text-accent-500 uppercase tracking-wider mb-2">Our Portfolio</div>
           <h2 class="text-2xl md:text-3xl font-black text-navy-700 tracking-tight">Previous Projects</h2>
-          <p class="text-slate-500 text-sm mt-2 max-w-lg mx-auto">A look at our work across Greater Victoria and Vancouver Island.</p>
+          <p class="text-slate-500 text-sm mt-2 max-w-2xl mx-auto">A look at our work across Greater Victoria and Vancouver Island.</p>
         </div>
         <div class="flex flex-wrap justify-center gap-2 mb-8">
           <button class="filter-btn active" onclick="filterProjects('all',this)">All</button>
@@ -257,7 +561,7 @@
         </div>
 
         <!-- Services grid — prominent, with full photos & descriptions -->
-        <div class="p-6 md:p-10">
+        <div class="p-5 md:p-8">
           <div class="text-center mb-8">
             <h3 class="text-xl md:text-2xl font-black text-navy-700 tracking-tight">What We Build &amp; How We Deliver</h3>
             <p class="text-slate-500 text-sm mt-1 max-w-xl mx-auto">Fast, reliable construction services for commercial property owners, developers, and incoming tenants.</p>
@@ -283,33 +587,6 @@
         </div>
       </section>
 
-      <!-- ── CONTRACTING FORM ── -->
-      <section class="section-card p-6 md:p-10 mt-6 fade-up" id="contracting-form">
-        <div class="grid md:grid-cols-2 gap-10">
-          <div>
-            <div class="text-xs font-bold text-accent-500 uppercase tracking-wider mb-2">Start Your Project</div>
-            <h2 class="text-2xl font-black text-navy-700 tracking-tight mb-4">Request a Contracting Quote</h2>
-            <p class="text-slate-500 text-sm leading-relaxed mb-6">Tell us about your commercial or residential project and we'll provide a detailed estimate. Free consultations for all new projects.</p>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-navy-50 flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-navy-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div><a href="tel:+12508822253" class="font-extrabold text-navy-700 text-sm hover:text-accent-500">(250) 882-2253</a></div>
-              <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-navy-50 flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-navy-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><span class="text-sm text-slate-600 font-medium">Mon–Fri: 9 AM – 5 PM</span></div>
-              <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-navy-50 flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-navy-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><span class="text-sm text-slate-600 font-medium">Colwood, BC · Greater Victoria</span></div>
-            </div>
-          </div>
-          <div>
-            <form name="contracting-inquiry" method="POST" data-netlify="true" class="space-y-3">
-              <input type="hidden" name="form-name" value="contracting-inquiry">
-              <div class="grid grid-cols-2 gap-3"><input type="text" name="name" placeholder="Full Name" required class="form-field"><input type="tel" name="phone" placeholder="Phone Number" class="form-field"></div>
-              <input type="email" name="email" placeholder="Email Address" required class="form-field">
-              <input type="text" name="address" placeholder="Project Address (Street, City, Postal Code)" class="form-field">
-              <select name="service" class="form-field"><option value="">Select a service...</option><option>Management &amp; Consulting</option><option>Tenant Improvements</option><option>Renovations</option><option>Finishing Carpentry</option><option>Maintenance</option><option>Custom Millwork</option><option>Bin &amp; Waste Services</option><option>Multiple / Not Sure</option></select>
-              <div><label class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Property Type</label><div class="grid grid-cols-3 gap-2"><label class="flex items-center justify-center p-2.5 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-accent-400 has-[:checked]:border-accent-400 has-[:checked]:bg-accent-50 text-xs font-bold text-slate-600"><input type="radio" name="property_type" value="Commercial" class="hidden"> Commercial</label><label class="flex items-center justify-center p-2.5 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-accent-400 has-[:checked]:border-accent-400 has-[:checked]:bg-accent-50 text-xs font-bold text-slate-600"><input type="radio" name="property_type" value="Residential" class="hidden"> Residential</label><label class="flex items-center justify-center p-2.5 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-accent-400 has-[:checked]:border-accent-400 has-[:checked]:bg-accent-50 text-xs font-bold text-slate-600"><input type="radio" name="property_type" value="Multi-Unit" class="hidden"> Multi-Unit</label></div></div>
-              <textarea name="project_details" rows="3" placeholder="Describe your project..." class="form-field" style="height:auto"></textarea>
-              <button type="submit" class="btn-primary w-full justify-center text-sm py-3">Request Contracting Quote <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>
-            </form>
-          </div>
-        </div>
-      </section>
     </div>
 
     <!-- ==================================================================== -->
@@ -819,7 +1096,7 @@
     <div class="max-w-6xl mx-auto px-6 py-10">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="md:col-span-2">
-          <div class="mb-4"><img src="images/logo-vcc.png" alt="VIC Coast Contracting LTD" class="h-16 w-auto opacity-90 mb-2"><div class="text-[10px] text-white/40 font-bold uppercase tracking-wider">Colwood, BC · Family Owned · 20+ Years</div></div>
+          <div class="mb-4"><div class="bg-white rounded-xl p-1.5 inline-block mb-2"><img src="images/logo-vcc.png" alt="VIC Coast Contracting LTD" class="h-14 w-auto"></div><div class="text-[10px] text-white/40 font-bold uppercase tracking-wider">Colwood, BC · Family Owned · 20+ Years</div></div>
           <p class="text-white/50 text-xs leading-relaxed max-w-sm">Family-owned and operated with over 20 years experience in multi-unit residential, retail &amp; commercial construction. Serving Greater Victoria and all of British Columbia.</p>
         </div>
         <div><h4 class="font-extrabold text-white text-xs uppercase tracking-wider mb-4">Services</h4><ul class="space-y-2"><li><a href="#" class="text-white/50 text-xs hover:text-accent-400 transition-colors" onclick="switchSection('contracting')">Contracting</a></li><li><a href="#" class="text-white/50 text-xs hover:text-accent-400 transition-colors" onclick="switchSection('housing')">Affordable Housing</a></li><li><a href="#" class="text-white/50 text-xs hover:text-accent-400 transition-colors" onclick="switchSection('storage')">Storage Rentals</a></li></ul></div>
@@ -1166,6 +1443,136 @@
     function filterHomes(size,btn){
       document.querySelectorAll('#homeGrid .home-card').forEach(c=>{c.style.display=(size==='all'||c.dataset.size===size)?'block':'none'});
       if(btn){btn.closest('.flex').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+    }
+
+    /* ========= QUOTE FORM WIZARD ========= */
+    let quoteStep=1;
+    let quoteData={type:'',service:'',size:'',timeline:'',name:'',phone:'',email:'',contact_pref:'call'};
+    const priceRanges={
+      homeowner:{
+        'kitchen-bath':{small:[5000,15000],medium:[15000,45000],large:[45000,100000]},
+        'general-reno':{small:[3000,12000],medium:[12000,40000],large:[40000,120000]},
+        'carpentry':{small:[2000,8000],medium:[8000,20000],large:[20000,50000]},
+        'millwork':{small:[3000,10000],medium:[10000,30000],large:[30000,75000]},
+        'maintenance':{small:[500,3000],medium:[3000,8000],large:[8000,20000]},
+        'other':{small:[2000,10000],medium:[10000,40000],large:[40000,100000]}
+      },
+      business:{
+        'tenant-improvement':{small:[10000,30000],medium:[30000,100000],large:[100000,500000]},
+        'commercial-reno':{small:[8000,25000],medium:[25000,80000],large:[80000,300000]},
+        'maintenance-program':{small:[2000,6000],medium:[6000,15000],large:[15000,40000]},
+        'commercial-millwork':{small:[5000,15000],medium:[15000,50000],large:[50000,150000]},
+        'bin-waste':{small:[500,2000],medium:[2000,5000],large:[5000,15000]},
+        'consulting':{small:[3000,10000],medium:[10000,30000],large:[30000,80000]}
+      }
+    };
+
+    function quoteSelectType(type){
+      quoteData.type=type;
+      document.querySelectorAll('#quoteStep1 .type-card').forEach(c=>c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      document.getElementById('homeownerServices').style.display=type==='homeowner'?'grid':'none';
+      document.getElementById('businessServices').style.display=type==='business'?'grid':'none';
+      setTimeout(()=>quoteGoTo(2),300);
+    }
+
+    function quoteSelectService(svc){
+      quoteData.service=svc;
+      document.querySelectorAll('#quoteStep2 .service-option').forEach(c=>c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      setTimeout(()=>quoteGoTo(3),300);
+    }
+
+    function quoteSelectSize(size){
+      quoteData.size=size;
+      document.querySelectorAll('#quoteStep3 .size-option').forEach(c=>c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+
+    function quoteSelectTimeline(tl){
+      quoteData.timeline=tl;
+      document.querySelectorAll('#quoteStep3 .timeline-pill').forEach(c=>c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+
+    function quoteGoTo(step){
+      quoteStep=step;
+      document.querySelectorAll('.quote-step').forEach(s=>s.classList.remove('active'));
+      document.getElementById('quoteStep'+step)?.classList.add('active');
+      document.querySelectorAll('.step-dot').forEach((d,i)=>{
+        d.classList.remove('done','current');
+        if(i<step-1)d.classList.add('done');
+        if(i===step-1)d.classList.add('current');
+      });
+      // Update button visibility
+      document.getElementById('backBtn').style.display=step>1?'block':'none';
+      document.getElementById('nextBtn').style.display=step<4?'inline-flex':'none';
+      document.getElementById('submitBtn').style.display=step===4?'block':'none';
+      window.scrollTo({top:document.getElementById('quote-form').offsetTop-100,behavior:'smooth'});
+    }
+
+    function quoteBack(){if(quoteStep>1)quoteGoTo(quoteStep-1)}
+
+    function quoteSubmit(e){
+      e.preventDefault();
+      quoteData.name=document.getElementById('q-name').value;
+      quoteData.phone=document.getElementById('q-phone').value;
+      quoteData.email=document.getElementById('q-email').value;
+      const ranges=priceRanges[quoteData.type]?.[quoteData.service];
+      const sizeKey=quoteData.size||'medium';
+      const range=ranges?.[sizeKey]||[5000,50000];
+      const lo=range[0].toLocaleString('en-CA');
+      const hi=range[1].toLocaleString('en-CA');
+      document.getElementById('estimateLow').textContent='$'+lo;
+      document.getElementById('estimateHigh').textContent='$'+hi;
+      const serviceNames={'kitchen-bath':'Kitchen & Bath Reno','general-reno':'General Renovation','carpentry':'Finishing Carpentry','millwork':'Custom Millwork','maintenance':'Maintenance','other':'Other','tenant-improvement':'Tenant Improvement','commercial-reno':'Commercial Reno','maintenance-program':'Maintenance Program','commercial-millwork':'Commercial Millwork','bin-waste':'Bin & Waste','consulting':'Management & Consulting'};
+      const sizeNames={small:'Small Scope',medium:'Medium Scope',large:'Large Scope'};
+      document.getElementById('estService').textContent=serviceNames[quoteData.service]||quoteData.service;
+      document.getElementById('estSize').textContent=sizeNames[quoteData.size]||'Medium Scope';
+      document.getElementById('estTimeline').textContent=quoteData.timeline||'Flexible';
+      document.getElementById('q-type-hidden').value=quoteData.type;
+      document.getElementById('q-service-hidden').value=quoteData.service;
+      document.getElementById('q-size-hidden').value=quoteData.size;
+      document.getElementById('q-timeline-hidden').value=quoteData.timeline;
+      quoteGoTo(5);
+      const formData=new FormData(document.getElementById('smartQuoteForm'));
+      fetch('/',{method:'POST',body:formData}).catch(()=>{});
+    }
+
+    function quoteSubmitEmail(){
+      const mailtoLink='mailto:info@viccoastcontracting.com?subject=Project+Estimate+Request&body=Name:+'+encodeURIComponent(quoteData.name)+'%0DPhone:+'+encodeURIComponent(quoteData.phone)+'%0DEmail:+'+encodeURIComponent(quoteData.email)+'%0DProject+Type:+'+encodeURIComponent(quoteData.type)+'%0DService:+'+encodeURIComponent(quoteData.service)+'%0DScope:+'+encodeURIComponent(quoteData.size)+'%0DTimeline:+'+encodeURIComponent(quoteData.timeline);
+      window.location.href=mailtoLink;
+    }
+
+    function toggleServices(tab){
+      document.getElementById('homeownerSvcs').style.display=tab==='homeowner'?'grid':'none';
+      document.getElementById('businessSvcs').style.display=tab==='business'?'grid':'none';
+      document.querySelectorAll('.svc-toggle-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.svc-toggle-btn').forEach(b=>{
+        if((tab==='homeowner'&&b.textContent.includes('Homeowners'))||(tab==='business'&&b.textContent.includes('Businesses'))){
+          b.classList.add('active');
+          b.style.background='#2D3A3E';
+          b.style.color='#fff';
+        }else{
+          b.style.background='transparent';
+          b.style.color='#64748b';
+        }
+      });
+    }
+
+    function scrollToAnchor(anchorId){
+      const el=document.getElementById(anchorId);
+      if(el){
+        el.scrollIntoView({behavior:'smooth'});
+        setTimeout(()=>{
+          document.querySelectorAll('.sub-nav-btn').forEach(b=>b.classList.remove('active'));
+          document.querySelectorAll('.sub-nav-btn').forEach(b=>{
+            if((anchorId==='quote-form'&&b.textContent.includes('Quote'))||(anchorId==='services-section'&&b.textContent.includes('Services'))||(anchorId==='projects'&&b.textContent.includes('Projects'))){
+              b.classList.add('active');
+            }
+          });
+        },100);
+      }
     }
 
     function closeMobile(){document.getElementById('mobileMenu')?.classList.remove('open')}
