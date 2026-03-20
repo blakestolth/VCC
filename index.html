@@ -1549,7 +1549,7 @@
       // scroll up
       window.scrollTo({top:document.querySelector('main').offsetTop-150,behavior:'smooth'});
       // fade in
-      setTimeout(()=>{document.querySelectorAll(`#${id} .fade-up`).forEach(el=>el.classList.add('visible'))},100);
+      setTimeout(()=>{document.querySelectorAll(`#${id} .fade-up`).forEach(el=>el.classList.add('visible'));document.querySelectorAll(`#${id} video[autoplay]`).forEach(v=>{v.load();v.play().catch(()=>{})});},100);
     }
 
     function scrollToActiveForm(){
