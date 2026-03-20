@@ -23,8 +23,19 @@
   </script>
   <style>
     *{font-family:'Work Sans',sans-serif}
-    body{background:linear-gradient(180deg,#f0f4f8 0%,#f1f5f9 40%,#e8eef5 100%);color:#334155;overflow-x:hidden;position:relative}
-    body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M 60 0 L 0 0 0 60' fill='none' stroke='%239dafc0' stroke-width='1'/%3E%3C/svg%3E");background-size:60px 60px}
+    body{background:#f0f4f8;color:#334155;overflow-x:hidden;position:relative}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background-image:
+        radial-gradient(circle at 16px 16px, rgba(45,58,62,0.18) 1.2px, transparent 1.2px),
+        radial-gradient(circle at 16px 16px, rgba(45,58,62,0.07) 2.4px, transparent 2.4px),
+        radial-gradient(circle at 16px 16px, rgba(255,255,255,0.12) 3px, transparent 3px);
+      background-size:32px 32px;
+      background-position:0 0, 0 0, 0 0}
+    body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background:
+        linear-gradient(180deg,rgba(240,244,248,0.3) 0%,rgba(232,238,245,0.5) 50%,rgba(226,232,240,0.3) 100%),
+        repeating-linear-gradient(0deg,transparent,transparent 31px,rgba(45,58,62,0.015) 31px,rgba(45,58,62,0.015) 32px),
+        repeating-linear-gradient(90deg,transparent,transparent 31px,rgba(45,58,62,0.015) 31px,rgba(45,58,62,0.015) 32px)}
     body>*{position:relative;z-index:1}
     .section-card{background:#fff;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 4px 6px -1px rgb(0 0 0/0.05)}
 
@@ -44,6 +55,38 @@
     /* Services */
     .service-card{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;transition:all .3s;background:#fff}
     .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(45,58,62,.15);border-color:#A1978A}
+
+    /* ---- PEGBOARD CLIP CONNECTOR ---- */
+    .peg-clip{position:relative;padding-top:22px}
+    /* Vertical peg stem — the metal rod that inserts into the pegboard hole */
+    .peg-clip::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+      width:6px;height:26px;
+      background:linear-gradient(90deg,#747a6c 0%,#A1978A 35%,#d5d1c7 50%,#A1978A 65%,#747a6c 100%);
+      border-radius:3px;
+      box-shadow:1px 2px 3px rgba(44,62,80,0.2),inset 0 1px 0 rgba(255,255,255,0.4);
+      z-index:3}
+    /* Hook plate — the wider bracket that grips the card from above */
+    .peg-clip::after{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
+      width:28px;height:8px;
+      background:linear-gradient(180deg,#B5AD98 0%,#A1978A 50%,#8C9483 100%);
+      border-radius:2px 2px 4px 4px;
+      box-shadow:0 2px 4px rgba(44,62,80,0.15),0 1px 1px rgba(44,62,80,0.1),inset 0 1px 0 rgba(255,255,255,0.25);
+      z-index:3}
+
+    /* Pegboard service card — hung look with depth */
+    .svc-bullet-card.peg-hung{
+      position:relative;
+      box-shadow:0 2px 4px rgba(44,62,80,0.08),0 4px 8px rgba(44,62,80,0.06),0 8px 16px rgba(44,62,80,0.04),0 16px 32px rgba(44,62,80,0.02);
+      transition:all .35s cubic-bezier(.4,0,.2,1);
+      transform-origin:top center}
+    .svc-bullet-card.peg-hung:hover{
+      transform:translateY(-6px) scale(1.01);
+      box-shadow:0 6px 12px rgba(44,62,80,0.1),0 12px 24px rgba(44,62,80,0.08),0 24px 48px rgba(44,62,80,0.05);
+      border-color:#A1978A}
+
+    /* Pegboard services wider grid */
+    .pegboard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:32px 24px;grid-auto-flow:dense}
+    @media(max-width:768px){.pegboard-grid{grid-template-columns:1fr;gap:24px}}
 
     /* Container homes */
     .home-card{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;transition:all .3s;background:#fff}
@@ -366,48 +409,26 @@
       </section>
 
 
-      <!-- ── SERVICES SHOWCASE — Fully Expanded, Dual-Column, Bullet Points ── -->
-      <section class="section-card overflow-hidden fade-up mt-6 scroll-mt-40" id="services-section">
-        <!-- Dark header bar -->
-        <div class="relative bg-navy-600 px-6 py-7 md:px-10">
-          <div class="absolute inset-0 opacity-10"><svg width="100%" height="100%"><defs><pattern id="svcGrid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#fff" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#svcGrid)"/></svg></div>
-          <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h2 class="text-xl md:text-2xl font-black text-white tracking-tight">Services</h2>
-              <p class="text-white/60 text-sm mt-1">Family-owned, 20+ years serving Greater Victoria — residential and commercial.</p>
-            </div>
-            <div class="flex gap-4 text-center">
-              <div><div class="text-xl font-black text-accent-400">20+</div><div class="text-[9px] text-white/40 font-bold uppercase">Years</div></div>
-              <div><div class="text-xl font-black text-accent-400">14</div><div class="text-[9px] text-white/40 font-bold uppercase">Services</div></div>
-              <div><div class="text-xl font-black text-accent-400">BC</div><div class="text-[9px] text-white/40 font-bold uppercase">Province</div></div>
-            </div>
+      <!-- ── SERVICES SHOWCASE — Pegboard Layout ── -->
+      <section class="fade-up mt-6 scroll-mt-40" id="services-section">
+
+        <!-- ── Accent line (Residential) ── -->
+        <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-accent-200">
+          <div class="w-10 h-10 rounded-xl bg-accent-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          </div>
+          <div>
+            <div class="text-[10px] font-bold text-accent-500 uppercase tracking-wider">Residential</div>
+            <h3 class="text-lg font-black text-navy-600 leading-tight">For Homeowners</h3>
           </div>
         </div>
 
-
-        <!-- Dual-column services layout with bullet points -->
-        <div class="p-5 md:p-8">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-            <!-- ═══════ LEFT COLUMN: HOMEOWNER ═══════ -->
-            <div>
-              <div class="flex items-center gap-3 mb-5 pb-3 border-b-2 border-accent-200">
-                <div class="w-10 h-10 rounded-xl bg-accent-50 flex items-center justify-center flex-shrink-0">
-                  <svg class="w-5 h-5 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                </div>
-                <div>
-                  <div class="text-[10px] font-bold text-accent-500 uppercase tracking-wider">Residential</div>
-                  <h3 class="text-lg font-black text-navy-600 leading-tight">For Homeowners</h3>
-                </div>
-              </div>
-
-              <div class="space-y-4">
+        <!-- Residential services — pegboard grid -->
+        <div class="pegboard-grid mb-10">
 
                 <!-- Kitchen &amp; Bathroom Renovations -->
-
-
-                <!-- Kitchen &amp; Bathroom Renovations -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('homeowner','kitchen-bath')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-accent-300 cursor-pointer p-4" onclick="startQuoteFor('homeowner','kitchen-bath')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/renovations.jpg" alt="Kitchen &amp; Bathroom Renovations" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -433,9 +454,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> ADA-compliant accessibility modifications</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- General Home Renovation -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('homeowner','general-reno')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-accent-300 cursor-pointer p-4" onclick="startQuoteFor('homeowner','general-reno')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/residential.png" alt="General Home Renovation" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -461,9 +484,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Heritage &amp; character home restoration</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Exterior &amp; Outdoor Living -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('homeowner','exterior')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-accent-300 cursor-pointer p-4" onclick="startQuoteFor('homeowner','exterior')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/maintenance-hero.jpg" alt="Exterior &amp; Outdoor Living" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -485,9 +510,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Concrete work — walkways, pads &amp; steps</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Painting &amp; Drywall -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('homeowner','painting')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-accent-300 cursor-pointer p-4" onclick="startQuoteFor('homeowner','painting')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/stock-3120.jpg" alt="Painting &amp; Drywall" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -509,9 +536,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Pressure washing &amp; surface prep</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Finishing Carpentry &amp; Trim -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('homeowner','carpentry')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-accent-300 cursor-pointer p-4" onclick="startQuoteFor('homeowner','carpentry')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/finishing-carpentry.jpg" alt="Finishing Carpentry &amp; Trim" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -536,9 +565,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Stain, paint &amp; finish matching</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Custom Millwork &amp; Cabinetry -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('homeowner','millwork')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-accent-300 cursor-pointer p-4" onclick="startQuoteFor('homeowner','millwork')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/millwork.jpg" alt="Custom Millwork &amp; Cabinetry" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -564,9 +595,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Wall paneling &amp; decorative wood features</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Home Maintenance &amp; Repairs -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('homeowner','maintenance')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-accent-300 cursor-pointer p-4" onclick="startQuoteFor('homeowner','maintenance')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/maintenance.jpg" alt="Home Maintenance &amp; Repairs" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -592,31 +625,31 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Emergency repairs &amp; same-day response</li>
                   </ul>
                 </div>
-
-
-                <button class="btn-primary text-xs py-2.5 px-5" onclick="startQuoteFor('homeowner','general-reno')">Get a Free Home Estimate <svg class="w-3.5 h-3.5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>
-              </div>
-            </div>
-
-            <!-- ═══════ RIGHT COLUMN: COMMERCIAL ═══════ -->
-            <div>
-              <div class="flex items-center gap-3 mb-5 pb-3 border-b-2 border-navy-200">
-                <div class="w-10 h-10 rounded-xl bg-navy-50 flex items-center justify-center flex-shrink-0">
-                  <svg class="w-5 h-5 text-navy-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                 </div>
-                <div>
-                  <div class="text-[10px] font-bold text-navy-400 uppercase tracking-wider">Commercial</div>
-                  <h3 class="text-lg font-black text-navy-600 leading-tight">For Businesses</h3>
-                </div>
-              </div>
 
-              <div class="space-y-4">
+
+                <div class="col-span-full mt-2 mb-4">
+                  <button class="btn-primary text-xs py-2.5 px-5" onclick="startQuoteFor('homeowner','general-reno')">Get a Free Home Estimate <svg class="w-3.5 h-3.5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>
+                </div>
+        </div><!-- /pegboard-grid residential -->
+
+        <!-- ── Navy line (Commercial) ── -->
+        <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-navy-200 mt-4">
+          <div class="w-10 h-10 rounded-xl bg-navy-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-navy-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <div>
+            <div class="text-[10px] font-bold text-navy-400 uppercase tracking-wider">Commercial</div>
+            <h3 class="text-lg font-black text-navy-600 leading-tight">For Businesses</h3>
+          </div>
+        </div>
+
+        <!-- Commercial services — pegboard grid -->
+        <div class="pegboard-grid">
 
                 <!-- Tenant Improvements &amp; Build-Outs -->
-
-
-                <!-- Tenant Improvements &amp; Build-Outs -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('business','tenant-improvement')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-navy-300 cursor-pointer p-4" onclick="startQuoteFor('business','tenant-improvement')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/tenant-improvements.jpg" alt="Tenant Improvements &amp; Build-Outs" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -641,9 +674,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Punchlist management &amp; turnkey delivery</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Commercial Renovations -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('business','commercial-reno')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-navy-300 cursor-pointer p-4" onclick="startQuoteFor('business','commercial-reno')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/ti-hero.jpg" alt="Commercial Renovations" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -668,9 +703,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Warranty-backed workmanship &amp; final inspection</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Commercial Exterior &amp; Site Work -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('business','commercial-exterior')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-navy-300 cursor-pointer p-4" onclick="startQuoteFor('business','commercial-exterior')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/carpentry-hero.jpg" alt="Commercial Exterior &amp; Site Work" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -692,9 +729,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Seasonal site prep &amp; snow management</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Management &amp; Consulting -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('business','consulting')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-navy-300 cursor-pointer p-4" onclick="startQuoteFor('business','consulting')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/management.jpg" alt="Management &amp; Consulting" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -719,9 +758,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Closeout documentation &amp; warranty coordination</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Custom Millwork &amp; Fixtures -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('business','commercial-millwork')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-navy-300 cursor-pointer p-4" onclick="startQuoteFor('business','commercial-millwork')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/millwork.jpg" alt="Custom Millwork &amp; Fixtures" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -745,9 +786,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Bulk rollout &amp; multi-location installations</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Bin &amp; Waste Services -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('business','bin-waste')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-navy-300 cursor-pointer p-4" onclick="startQuoteFor('business','bin-waste')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/bin-service.jpg" alt="Bin &amp; Waste Services" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -772,9 +815,11 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Multi-bin management for large projects</li>
                   </ul>
                 </div>
+                </div>
 
                 <!-- Maintenance Programs -->
-                <div class="svc-bullet-card group rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer p-4" onclick="startQuoteFor('business','maintenance-program')">
+                <div class="peg-clip">
+                <div class="svc-bullet-card peg-hung group rounded-xl border border-earth-200 bg-white hover:border-navy-300 cursor-pointer p-4" onclick="startQuoteFor('business','maintenance-program')">
                   <div class="flex items-start gap-3 mb-2">
                     <img src="images/contracting/maintenance-hero.jpg" alt="Maintenance Programs" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
@@ -799,14 +844,13 @@
                     <li class="flex items-start gap-1.5"><span class="text-accent-400 mt-0.5">•</span> Customizable service tiers — Bronze, Silver, Gold</li>
                   </ul>
                 </div>
+                </div>
 
 
-                <button class="btn-secondary text-xs py-2.5 px-5" onclick="startQuoteFor('business','tenant-improvement')">Get a Free Business Estimate <svg class="w-3.5 h-3.5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>
-              </div>
-            </div>
-
-          </div>
-        </div>
+                <div class="col-span-full mt-2">
+                  <button class="btn-secondary text-xs py-2.5 px-5" onclick="startQuoteFor('business','tenant-improvement')">Get a Free Business Estimate <svg class="w-3.5 h-3.5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>
+                </div>
+        </div><!-- /pegboard-grid commercial -->
       </section>
 
 
