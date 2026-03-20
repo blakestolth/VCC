@@ -16,8 +16,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>
     tailwind.config={theme:{extend:{colors:{
-      navy:{50:'#e8edee',100:'#d1dbdd',200:'#a3b7bc',300:'#6B8A9E',400:'#4a5e63',500:'#3d4f54',600:'#2D3A3E',700:'#2D3A3E',800:'#232e31',900:'#1a2326'},
-      accent:{50:'#f5ebe8',100:'#edd5ce',200:'#dbb0a3',300:'#c4867a',400:'#a85a4a',500:'#8B3B2D',600:'#7A3427',700:'#6a2d22',800:'#5a261d',900:'#4a1f18'}
+      navy:{50:'#e8edef',100:'#d1dade',200:'#a3b7bc',300:'#6B8A9E',400:'#4A6E7F',500:'#3d4f54',600:'#2D3A3E',700:'#232e31',800:'#1a2326',900:'#111819'},
+      accent:{50:'#f5ebe8',100:'#edd5ce',200:'#dbb0a3',300:'#c4867a',400:'#a85a4a',500:'#8B3B2D',600:'#7A3427',700:'#6a2d22',800:'#5a261d',900:'#4a1f18'},
+      earth:{50:'#f4f3f0',100:'#e8e6e0',200:'#d5d1c7',300:'#B5AD98',400:'#A1978A',500:'#8C9483',600:'#747a6c',700:'#5c6256',800:'#454940',900:'#2e302b'}
     }}}}
   </script>
   <style>
@@ -27,7 +28,7 @@
 
     /* Header tab nav */
     .header-tab{padding:8px 20px;font-weight:700;font-size:13px;border-radius:8px;transition:all .25s;cursor:pointer;border:2px solid transparent;color:#64748b;background:transparent}
-    .header-tab:hover{color:#2D3A3E;background:#e8edee}
+    .header-tab:hover{color:#2D3A3E;background:#f4f3f0}
     .header-tab.active{background:#2D3A3E;color:#fff;border-color:#2D3A3E}
     @media(max-width:768px){.header-tab{padding:6px 12px;font-size:11px}}
 
@@ -40,11 +41,11 @@
 
     /* Services */
     .service-card{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;transition:all .3s;background:#fff}
-    .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(45,58,62,.15);border-color:#8B3B2D}
+    .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(45,58,62,.15);border-color:#A1978A}
 
     /* Container homes */
     .home-card{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;transition:all .3s;background:#fff}
-    .home-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(45,58,62,.15);border-color:#8B3B2D}
+    .home-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -10px rgba(45,58,62,.15);border-color:#A1978A}
 
     /* Forms */
     .form-field{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;padding:12px 16px;font-size:14px;width:100%;transition:all .2s;font-weight:500}
@@ -62,12 +63,12 @@
     .mobile-menu.open{max-height:400px}
 
     .filter-btn{padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:all .2s;border:1.5px solid #e2e8f0;background:#fff;color:#64748b}
-    .filter-btn:hover{border-color:#2D3A3E;color:#2D3A3E}
+    .filter-btn:hover{border-color:#4A6E7F;color:#4A6E7F}
     .filter-btn.active{background:#2D3A3E;color:#fff;border-color:#2D3A3E}
 
-    .scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#8B3B2D,#7A3427);z-index:100;transition:width .1s}
+    .scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#8B3B2D,#A1978A);z-index:100;transition:width .1s}
 
-    .spec-table th{background:#e8edee;font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:#64748b;padding:10px 14px}
+    .spec-table th{background:#f4f3f0;font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:#64748b;padding:10px 14px}
     .spec-table td{padding:10px 14px;font-size:13px;font-weight:600;border-bottom:1px solid #f1f5f9}
 
     /* ---- SCROLL SPY SIDEBAR ---- */
@@ -80,18 +81,18 @@
 
     /* ---- CONFIGURATOR ---- */
     .cfg-size-btn{position:relative;flex:1;padding:16px 12px;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:all .3s;background:#fff;text-align:center}
-    .cfg-size-btn:hover{border-color:#A1978A}
-    .cfg-size-btn.selected{border-color:#2D3A3E;background:#e8edee;box-shadow:0 4px 12px -2px rgba(45,58,62,.15)}
+    .cfg-size-btn:hover{border-color:#B5AD98}
+    .cfg-size-btn.selected{border-color:#2D3A3E;background:#f4f3f0;box-shadow:0 4px 12px -2px rgba(45,58,62,.15)}
     .cfg-size-btn .size-label{font-size:22px;font-weight:900;color:#2D3A3E}
     .cfg-size-btn .size-sub{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
-    .cfg-size-btn.selected .size-sub{color:#6B8A9E}
+    .cfg-size-btn.selected .size-sub{color:#4A6E7F}
 
     .cfg-edition-btn{position:relative;flex:1;padding:14px 12px;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:all .3s;background:#fff;text-align:center}
-    .cfg-edition-btn:hover{border-color:#A1978A}
+    .cfg-edition-btn:hover{border-color:#B5AD98}
     .cfg-edition-btn.selected{box-shadow:0 4px 12px -2px rgba(45,58,62,.15)}
-    .cfg-edition-btn.ed-basic.selected{border-color:#64748b;background:#f8fafc}
+    .cfg-edition-btn.ed-basic.selected{border-color:#8C9483;background:#f4f3f0}
     .cfg-edition-btn.ed-flagship.selected{border-color:#8B3B2D;background:#f5ebe8}
-    .cfg-edition-btn.ed-luxury.selected{border-color:#2D3A3E;background:#e8edee}
+    .cfg-edition-btn.ed-luxury.selected{border-color:#2D3A3E;background:#f4f3f0}
     .cfg-edition-btn .ed-label{font-size:14px;font-weight:800;color:#2D3A3E}
     .cfg-edition-btn .ed-sub{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
     .cfg-edition-btn .ed-popular{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#8B3B2D;color:#fff;font-size:9px;font-weight:800;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
@@ -103,7 +104,7 @@
     .cfg-spec-row .spec-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .cfg-spec-row .spec-icon svg{width:14px;height:14px}
 
-    .cfg-price-tag{background:linear-gradient(135deg,#2D3A3E 0%,#6B8A9E 100%);border-radius:16px;padding:24px;color:#fff;position:relative;overflow:hidden}
+    .cfg-price-tag{background:linear-gradient(135deg,#2D3A3E 0%,#4A6E7F 100%);border-radius:16px;padding:24px;color:#fff;position:relative;overflow:hidden}
     .cfg-price-tag::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(139,59,45,.15) 0%,transparent 70%)}
   </style>
 </head>
@@ -264,11 +265,11 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <!-- Management & Consulting -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/management.jpg" alt="Management and Consulting" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Management &amp; Consulting</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Experienced oversight and consulting for owners, developers, and builders on retail tenant improvements, commercial projects, and multi-unit renovations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-navy-50 text-navy-700 font-bold px-2 py-1 rounded">Project Oversight</span><span class="text-[10px] bg-navy-50 text-navy-700 font-bold px-2 py-1 rounded">Trade Coordination</span><span class="text-[10px] bg-navy-50 text-navy-700 font-bold px-2 py-1 rounded">Scheduling</span><span class="text-[10px] bg-navy-50 text-navy-700 font-bold px-2 py-1 rounded">Safety Compliance</span></div></div></div>
+            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/management.jpg" alt="Management and Consulting" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Management &amp; Consulting</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Experienced oversight and consulting for owners, developers, and builders on retail tenant improvements, commercial projects, and multi-unit renovations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Project Oversight</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Trade Coordination</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Scheduling</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Safety Compliance</span></div></div></div>
             <!-- Tenant Improvements -->
             <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/tenant-improvements.jpg" alt="Tenant Improvements" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Tenant Improvements</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Fast, reliable tenant improvements for restaurants, retail, office, medical, and industrial spaces. From basic refreshes to complete build-outs with tight lease deadlines.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Demolition &amp; Reconfig</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Framing &amp; Drywall</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">T-Bar Ceilings</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Flooring &amp; Millwork</span></div></div></div>
             <!-- Renovations -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/renovations.jpg" alt="Renovations" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Renovations</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Full interior remodels, layout changes, cosmetic upgrades, structural updates, and code-compliant improvements with precision planning and minimal disruption to tenants or operations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-navy-50 text-navy-700 font-bold px-2 py-1 rounded">Kitchens &amp; Bathrooms</span><span class="text-[10px] bg-navy-50 text-navy-700 font-bold px-2 py-1 rounded">Framing &amp; Layout</span><span class="text-[10px] bg-navy-50 text-navy-700 font-bold px-2 py-1 rounded">Drywall &amp; Paint</span><span class="text-[10px] bg-navy-50 text-navy-700 font-bold px-2 py-1 rounded">Heritage Spaces</span></div></div></div>
+            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/renovations.jpg" alt="Renovations" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Renovations</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Full interior remodels, layout changes, cosmetic upgrades, structural updates, and code-compliant improvements with precision planning and minimal disruption to tenants or operations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Kitchens &amp; Bathrooms</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Framing &amp; Layout</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Drywall &amp; Paint</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Heritage Spaces</span></div></div></div>
             <!-- Finishing Carpentry -->
             <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/finishing-carpentry.jpg" alt="Finishing Carpentry" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Finishing Carpentry</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Trim, baseboards, crown moulding, doors, casings, and custom detailing with exact measurements, clean miters, and seamless integration to elevate interiors.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Trim &amp; Baseboards</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Crown Moulding</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Door &amp; Window Casings</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Custom Detailing</span></div></div></div>
           </div>
@@ -349,15 +350,15 @@
         <!-- How it works — below the dark banner -->
         <div class="p-6 md:p-10">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="flex items-start gap-4 bg-navy-50 rounded-xl p-5">
+            <div class="flex items-start gap-4 bg-earth-50 rounded-xl p-5">
               <span class="w-10 h-10 rounded-full bg-navy-700 text-white flex items-center justify-center text-lg font-black flex-shrink-0">1</span>
               <div><h4 class="font-extrabold text-navy-700 text-sm mb-1">Choose Your Model</h4><p class="text-xs text-slate-500 leading-relaxed">Pick from 20FT, 30FT, or 40FT containers — each available in Basic, Flagship, or Luxury.</p></div>
             </div>
-            <div class="flex items-start gap-4 bg-navy-50 rounded-xl p-5">
+            <div class="flex items-start gap-4 bg-earth-50 rounded-xl p-5">
               <span class="w-10 h-10 rounded-full bg-navy-700 text-white flex items-center justify-center text-lg font-black flex-shrink-0">2</span>
               <div><h4 class="font-extrabold text-navy-700 text-sm mb-1">Customize &amp; Order</h4><p class="text-xs text-slate-500 leading-relaxed">Select your exterior color, finishes, and any add-ons. 30% deposit starts production (50% for Luxury).</p></div>
             </div>
-            <div class="flex items-start gap-4 bg-navy-50 rounded-xl p-5">
+            <div class="flex items-start gap-4 bg-earth-50 rounded-xl p-5">
               <span class="w-10 h-10 rounded-full bg-navy-700 text-white flex items-center justify-center text-lg font-black flex-shrink-0">3</span>
               <div><h4 class="font-extrabold text-navy-700 text-sm mb-1">We Deliver &amp; Set Up</h4><p class="text-xs text-slate-500 leading-relaxed">Ready in 45 working days. Delivered and positioned on your property anywhere in British Columbia.</p></div>
             </div>
@@ -520,7 +521,7 @@
             <!-- Right: Full Specs (3 cols) -->
             <div class="md:col-span-3">
               <!-- Dimensions -->
-              <div class="bg-navy-50 rounded-xl p-4 mb-4">
+              <div class="bg-earth-50 rounded-xl p-4 mb-4">
                 <div class="text-xs font-bold text-navy-700 uppercase tracking-wider mb-3">Dimensions</div>
                 <div class="grid grid-cols-2 gap-3">
                   <div>
@@ -593,7 +594,7 @@
           <button class="filter-btn" onclick="filterHomes('40ft',this)">40FT</button>
         </div>
         <!-- Pricing reference table -->
-        <div class="overflow-x-auto mb-8 bg-navy-50 rounded-xl p-4">
+        <div class="overflow-x-auto mb-8 bg-earth-50 rounded-xl p-4">
           <table class="spec-table w-full text-left"><thead><tr><th class="rounded-tl-lg">Size</th><th>Basic (A)</th><th>Flagship (B)</th><th>Luxury (C)</th><th>Beds</th><th class="rounded-tr-lg">Weight</th></tr></thead><tbody>
             <tr><td class="font-extrabold text-navy-700">20FT</td><td>$13,205</td><td class="text-accent-600 font-bold">$25,895</td><td>$15,869</td><td>2 Bed · 1 Bath</td><td class="text-slate-400">3,500–4,500 kg</td></tr>
             <tr><td class="font-extrabold text-navy-700">30FT</td><td>$18,171</td><td class="text-accent-600 font-bold">$32,522</td><td>$20,623</td><td>1–2 Bed · 1 Bath</td><td class="text-slate-400">4,500–6,000 kg</td></tr>
@@ -732,7 +733,7 @@
             <div class="text-xs font-bold text-accent-500 uppercase tracking-wider mb-2">Get Your Container Home</div>
             <h2 class="text-2xl font-black text-navy-700 tracking-tight mb-4">Request a Home Quote</h2>
             <p class="text-slate-500 text-sm leading-relaxed mb-6">Select your preferred model and we'll provide a custom quote including delivery to your location anywhere in BC.</p>
-            <div class="bg-navy-50 rounded-xl p-5 mb-4">
+            <div class="bg-earth-50 rounded-xl p-5 mb-4">
               <h4 class="font-extrabold text-navy-700 text-sm mb-3">What's Included</h4>
               <div class="grid grid-cols-2 gap-2">
                 <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="text-xs font-bold text-slate-600">Turnkey Ready</span></div>
