@@ -150,7 +150,7 @@
       <div class="flex items-center justify-between">
         <!-- Logo — white on transparent -->
         <a href="#" class="flex-shrink-0 block" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
-          <div class="bg-white rounded-2xl p-1.5 shadow-sm"><img src="images/logo-vcc.png" alt="VIC Coast Contracting LTD — Affordable Housing" class="h-[5.5rem] w-auto"></div>
+          <img src="images/logo-vcc.png" alt="VIC Coast Contracting LTD — Affordable Housing" class="h-[7rem] w-auto">
         </a>
 
         <!-- Section Tabs as Nav (desktop) -->
@@ -195,13 +195,286 @@
 
       <!-- ── SUB-MENU NAV BAR ── -->
       <div class="sub-nav sticky top-16 bg-white z-50 px-6 md:px-10 py-3">
-        <button class="sub-nav-btn active" onclick="scrollToAnchor('quote-form')">Get a Quote</button>
-        <button class="sub-nav-btn" onclick="scrollToAnchor('services-section')">Services</button>
-        <button class="sub-nav-btn" onclick="scrollToAnchor('projects')">Projects</button>
+        <button class="sub-nav-btn active" onclick="scrollToAnchor('services-section')">Services</button>
+        <button class="sub-nav-btn" onclick="scrollToAnchor('quote-form')">Get a Quote</button>
+        <button class="sub-nav-btn" onclick="scrollToAnchor('projects')">See Our Work!</button>
       </div>
 
+      <!-- ── SERVICES SHOWCASE — Fully Expanded, Dual-Column ── -->
+      <section class="section-card overflow-hidden fade-up mt-6 scroll-mt-40" id="services-section">
+        <!-- Dark header bar -->
+        <div class="relative bg-navy-600 px-6 py-7 md:px-10">
+          <div class="absolute inset-0 opacity-10"><svg width="100%" height="100%"><defs><pattern id="svcGrid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#fff" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#svcGrid)"/></svg></div>
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h2 class="text-xl md:text-2xl font-black text-white tracking-tight">Our Services</h2>
+              <p class="text-white/60 text-sm mt-1">20+ years serving Greater Victoria — residential and commercial.</p>
+            </div>
+            <div class="flex gap-4 text-center">
+              <div><div class="text-xl font-black text-accent-400">20+</div><div class="text-[9px] text-white/40 font-bold uppercase">Years</div></div>
+              <div><div class="text-xl font-black text-accent-400">10</div><div class="text-[9px] text-white/40 font-bold uppercase">Services</div></div>
+              <div><div class="text-xl font-black text-accent-400">BC</div><div class="text-[9px] text-white/40 font-bold uppercase">Province</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dual-column services layout -->
+        <div class="p-5 md:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <!-- ═══════ LEFT COLUMN: HOMEOWNER ═══════ -->
+            <div>
+              <div class="flex items-center gap-3 mb-5 pb-3 border-b-2 border-accent-200">
+                <div class="w-10 h-10 rounded-xl bg-accent-50 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                </div>
+                <div>
+                  <div class="text-[10px] font-bold text-accent-500 uppercase tracking-wider">Residential</div>
+                  <h3 class="text-lg font-black text-navy-600 leading-tight">For Homeowners</h3>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <!-- Renovations -->
+                <a href="#" onclick="startQuoteFor('homeowner','kitchen-bath');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/renovations.jpg" alt="Renovations" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-accent-600 transition-colors">Kitchen & Bathroom Renovations</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Full remodels, layout changes, flooring, tile, drywall, and paint. Precision planning with minimal disruption.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Kitchens</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Bathrooms</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Full Home</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- General Renovation -->
+                <a href="#" onclick="startQuoteFor('homeowner','general-reno');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/renovations.jpg" alt="General Renovation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-accent-600 transition-colors">General Home Renovation</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Cosmetic upgrades, structural updates, room additions, and whole-home refreshes tailored to your vision.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Framing</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Drywall</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Layout Changes</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- Finishing Carpentry -->
+                <a href="#" onclick="startQuoteFor('homeowner','carpentry');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/finishing-carpentry.jpg" alt="Finishing Carpentry" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-accent-600 transition-colors">Finishing Carpentry & Trim</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Baseboards, crown moulding, casings, wainscoting, and custom detailing with clean miters and seamless integration.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Trim</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Moulding</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Wainscoting</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- Custom Millwork -->
+                <a href="#" onclick="startQuoteFor('homeowner','millwork');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/millwork.jpg" alt="Custom Millwork" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-accent-600 transition-colors">Custom Millwork & Cabinetry</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Built-in shelving, entertainment units, pantry systems, window seats, and custom cabinetry designed to fit your space.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Shelving</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Cabinetry</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Wall Panels</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- Home Maintenance -->
+                <a href="#" onclick="startQuoteFor('homeowner','maintenance');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-accent-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/maintenance.jpg" alt="Home Maintenance" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-accent-600 transition-colors">Home Maintenance & Repairs</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Seasonal inspections, deck and fence restoration, general repairs, and preventative care to keep your home in top shape.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Inspections</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Repairs</span>
+                      <span class="text-[9px] bg-earth-50 text-earth-700 font-bold px-2 py-0.5 rounded">Preventative</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+              </div>
+
+              <div class="mt-4 text-center">
+                <button class="btn-primary text-xs py-2.5 px-5" onclick="startQuoteFor('homeowner','general-reno')">Get a Free Home Estimate <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>
+              </div>
+            </div>
+
+            <!-- ═══════ RIGHT COLUMN: COMMERCIAL ═══════ -->
+            <div>
+              <div class="flex items-center gap-3 mb-5 pb-3 border-b-2 border-navy-200">
+                <div class="w-10 h-10 rounded-xl bg-navy-50 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-navy-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                </div>
+                <div>
+                  <div class="text-[10px] font-bold text-navy-400 uppercase tracking-wider">Commercial</div>
+                  <h3 class="text-lg font-black text-navy-600 leading-tight">For Businesses</h3>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <!-- Tenant Improvements -->
+                <a href="#" onclick="startQuoteFor('business','tenant-improvement');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/tenant-improvements.jpg" alt="Tenant Improvements" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-navy-400 transition-colors">Tenant Improvements & Build-Outs</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Complete build-outs for restaurants, retail, offices, and medical clinics. Demolition through final finishes within lease deadlines.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Retail</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Restaurant</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Office</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- Commercial Renovations -->
+                <a href="#" onclick="startQuoteFor('business','commercial-reno');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/renovations.jpg" alt="Commercial Renovations" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-navy-400 transition-colors">Commercial Renovations</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Interior remodels, layout reconfiguration, structural updates, and code-compliance upgrades with minimal disruption to operations.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Layout</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Structural</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Code Upgrades</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- Management & Consulting -->
+                <a href="#" onclick="startQuoteFor('business','consulting');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/management.jpg" alt="Management and Consulting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-navy-400 transition-colors">Management & Consulting</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Project oversight for owners, developers, and builders. Trade coordination, scheduling, safety compliance, and documentation.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Oversight</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Scheduling</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Compliance</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- Commercial Millwork & Fixtures -->
+                <a href="#" onclick="startQuoteFor('business','commercial-millwork');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/millwork.jpg" alt="Commercial Millwork" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-navy-400 transition-colors">Custom Millwork & Fixtures</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Reception desks, display cases, commercial cabinetry, wall panels, and specialty fixtures built for high-traffic environments.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Reception</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Displays</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Cabinets</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- Bin & Waste Services -->
+                <a href="#" onclick="startQuoteFor('business','bin-waste');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/bin-service.jpg" alt="Bin and Waste Services" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-navy-400 transition-colors">Bin & Waste Services</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Construction debris, demolition waste, drywall disposal, and regulated waste streams. One-time or ongoing pickup available.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Debris</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Demolition</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Hazmat</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+
+                <!-- Maintenance Programs -->
+                <a href="#" onclick="startQuoteFor('business','maintenance-program');return false" class="group flex gap-4 p-3 rounded-xl border border-earth-200 bg-white hover:border-navy-300 hover:shadow-md transition-all cursor-pointer">
+                  <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="images/contracting/maintenance.jpg" alt="Maintenance Programs" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-extrabold text-navy-600 text-sm mb-1 group-hover:text-navy-400 transition-colors">Maintenance Programs</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-2">Scheduled property upkeep, preventative inspections, emergency repairs, safety checks, and trade coordination. On-call and reliable.</p>
+                    <div class="flex flex-wrap gap-1">
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Scheduled</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">Emergency</span>
+                      <span class="text-[9px] bg-accent-50 text-accent-700 font-bold px-2 py-0.5 rounded">On Call</span>
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-5 h-5 text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </div>
+                </a>
+              </div>
+
+              <div class="mt-4 text-center">
+                <button class="btn-secondary text-xs py-2.5 px-5" onclick="startQuoteFor('business','tenant-improvement')">Get a Free Business Estimate <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       <!-- ── SMART MULTI-STEP QUOTE FORM ── -->
-      <section class="section-card p-5 md:p-8 fade-up mt-6" id="quote-form">
+      <section class="section-card p-5 md:p-8 fade-up mt-6 scroll-mt-40" id="quote-form">
         <div class="text-center mb-8">
           <h2 class="text-2xl md:text-3xl font-black text-navy-700 tracking-tight">Get Your Free Estimate</h2>
           <p class="text-slate-500 text-sm mt-2">Answer a few questions and we'll give you a rough project cost in under 60 seconds.</p>
@@ -360,122 +633,13 @@
         </form>
       </section>
 
-      <!-- ── SERVICES VISUAL ── -->
-      <section class="section-card p-5 md:p-8 fade-up mt-6 scroll-mt-40" id="services-section">
-        <div class="text-center mb-8">
-          <h3 class="text-xl md:text-2xl font-black text-navy-700 tracking-tight mb-4">Our Services</h3>
-        </div>
 
-        <!-- Two-tab toggle -->
-        <div class="flex gap-2 justify-center mb-8">
-          <button class="svc-toggle-btn active bg-navy-700 text-white px-6 py-2 rounded-full font-bold text-sm" onclick="toggleServices('homeowner')">For Homeowners</button>
-          <button class="svc-toggle-btn text-slate-600 px-6 py-2 rounded-full font-bold text-sm" onclick="toggleServices('business')">For Businesses</button>
-        </div>
-
-        <!-- For Homeowners -->
-        <div id="homeownerSvcs" class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Renovations</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Kitchen, bathroom, and full home remodels with premium finishes</p>
-          </div>
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Finishing Carpentry</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Trim, baseboards, crown moulding, doors, and custom detailing</p>
-          </div>
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Custom Millwork</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Built-in shelving, cabinetry, wall panels, and specialty pieces</p>
-          </div>
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Maintenance</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Seasonal inspections, repairs, and preventative upkeep</p>
-          </div>
-        </div>
-
-        <!-- For Businesses -->
-        <div id="businessSvcs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" style="display:none">
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Tenant Improvements</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Restaurant, retail, office, and industrial build-outs</p>
-          </div>
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Commercial Renovations</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Layout changes, code upgrades, and full remodels</p>
-          </div>
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Management &amp; Consulting</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Project oversight, trade coordination, and compliance</p>
-          </div>
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Custom Millwork &amp; Fixtures</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Reception desks, display cases, and commercial cabinetry</p>
-          </div>
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Bin &amp; Waste Services</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Construction debris, demolition waste, and hazardous disposal</p>
-          </div>
-          <div class="bg-earth-50 border border-earth-100 rounded-xl p-4">
-            <h4 class="font-extrabold text-navy-700 text-base mb-2">Maintenance Programs</h4>
-            <p class="text-xs text-slate-600 leading-relaxed">Scheduled property upkeep and emergency repairs</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── DARK HERO BANNER ── -->
-      <section class="section-card overflow-hidden mt-6 fade-up">
-        <!-- Dark intro banner merging the hero tagline -->
-        <div class="relative bg-navy-700 px-6 py-10 md:px-10 md:py-14">
-          <div class="absolute inset-0 opacity-10"><svg width="100%" height="100%"><defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#fff" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g)"/></svg></div>
-          <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
-                <span class="w-2 h-2 bg-accent-400 rounded-full animate-pulse"></span>
-                <span class="text-white/80 text-xs font-bold uppercase tracking-wider">Family Owned · 20+ Years</span>
-              </div>
-              <h2 class="text-2xl md:text-3xl font-black text-white leading-tight tracking-tight mb-3">Victoria's #1 Tenant Improvement Contractor</h2>
-              <p class="text-white/70 text-sm leading-relaxed max-w-md">Family-owned and operated with over 20 years experience in multi-unit residential, retail &amp; commercial construction. We handle trade coordination, scheduling, safety compliance, documentation and more.</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div class="text-center"><div class="text-2xl font-black text-accent-400">20+</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Years</div></div>
-              <div class="text-center"><div class="text-2xl font-black text-accent-400">7</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Services</div></div>
-              <div class="text-center"><div class="text-2xl font-black text-accent-400">9</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Home Models</div></div>
-              <div class="text-center"><div class="text-2xl font-black text-accent-400">BC</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Province-Wide</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Services grid — prominent, with full photos & descriptions -->
-        <div class="p-5 md:p-8">
-          <div class="text-center mb-8">
-            <h3 class="text-xl md:text-2xl font-black text-navy-700 tracking-tight">What We Build &amp; How We Deliver</h3>
-            <p class="text-slate-500 text-sm mt-1 max-w-2xl mx-auto">Fast, reliable construction services for commercial property owners, developers, and incoming tenants.</p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <!-- Management & Consulting -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/management.jpg" alt="Management and Consulting" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Management &amp; Consulting</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Experienced oversight and consulting for owners, developers, and builders on retail tenant improvements, commercial projects, and multi-unit renovations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Project Oversight</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Trade Coordination</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Scheduling</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Safety Compliance</span></div></div></div>
-            <!-- Tenant Improvements -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/tenant-improvements.jpg" alt="Tenant Improvements" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Tenant Improvements</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Fast, reliable tenant improvements for restaurants, retail, office, medical, and industrial spaces. From basic refreshes to complete build-outs with tight lease deadlines.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Demolition &amp; Reconfig</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Framing &amp; Drywall</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">T-Bar Ceilings</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Flooring &amp; Millwork</span></div></div></div>
-            <!-- Renovations -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/renovations.jpg" alt="Renovations" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Renovations</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Full interior remodels, layout changes, cosmetic upgrades, structural updates, and code-compliant improvements with precision planning and minimal disruption to tenants or operations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Kitchens &amp; Bathrooms</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Framing &amp; Layout</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Drywall &amp; Paint</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Heritage Spaces</span></div></div></div>
-            <!-- Finishing Carpentry -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/finishing-carpentry.jpg" alt="Finishing Carpentry" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Finishing Carpentry</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Trim, baseboards, crown moulding, doors, casings, and custom detailing with exact measurements, clean miters, and seamless integration to elevate interiors.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Trim &amp; Baseboards</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Crown Moulding</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Door &amp; Window Casings</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Custom Detailing</span></div></div></div>
-          </div>
-
-          <!-- Row 2: remaining 3 services -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-5">
-            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/maintenance.jpg" alt="Maintenance" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Maintenance</h4><p class="text-xs text-slate-500 leading-relaxed">Preventative inspections, seasonal upkeep, general repairs, safety &amp; code checks, and trade coordination. Local. Reliable. On Call.</p></div></div>
-            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/millwork.jpg" alt="Custom Millwork" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Custom Millwork</h4><p class="text-xs text-slate-500 leading-relaxed">Custom trim &amp; profiles, wall panels, built-in shelving, door &amp; window casings, reception desks — precise fits, clean lines, tight joints.</p></div></div>
-            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/bin-service.jpg" alt="Bin &amp; Waste Services" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Bin &amp; Waste Services</h4><p class="text-xs text-slate-500 leading-relaxed">Construction waste, demolition debris, drywall disposal, and regulated waste streams. Hazardous materials managed with licensed providers.</p></div></div>
-          </div>
-        </div>
-      </section>
 
       <!-- ── PROJECTS SECTION ── -->
       <section class="section-card p-5 md:p-8 fade-up mt-6 scroll-mt-40" id="projects">
         <div class="text-center mb-8">
           <div class="text-xs font-bold text-accent-500 uppercase tracking-wider mb-2">Our Portfolio</div>
-          <h2 class="text-2xl md:text-3xl font-black text-navy-700 tracking-tight">Previous Projects</h2>
+          <h2 class="text-2xl md:text-3xl font-black text-navy-700 tracking-tight">See Our Work!</h2>
           <p class="text-slate-500 text-sm mt-2 max-w-2xl mx-auto">A look at our work across Greater Victoria and Vancouver Island.</p>
         </div>
         <div class="flex flex-wrap justify-center gap-2 mb-8">
@@ -537,55 +701,6 @@
         </div>
       </section>
 
-      <!-- ── MERGED: Hero tagline + Full-Service Contracting + Services ── -->
-      <section class="section-card overflow-hidden mt-6 fade-up">
-        <!-- Dark intro banner merging the hero tagline -->
-        <div class="relative bg-navy-700 px-6 py-10 md:px-10 md:py-14">
-          <div class="absolute inset-0 opacity-10"><svg width="100%" height="100%"><defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#fff" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g)"/></svg></div>
-          <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
-                <span class="w-2 h-2 bg-accent-400 rounded-full animate-pulse"></span>
-                <span class="text-white/80 text-xs font-bold uppercase tracking-wider">Family Owned · 20+ Years</span>
-              </div>
-              <h2 class="text-2xl md:text-3xl font-black text-white leading-tight tracking-tight mb-3">Victoria's #1 Tenant Improvement Contractor</h2>
-              <p class="text-white/70 text-sm leading-relaxed max-w-md">Family-owned and operated with over 20 years experience in multi-unit residential, retail &amp; commercial construction. We handle trade coordination, scheduling, safety compliance, documentation and more.</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div class="text-center"><div class="text-2xl font-black text-accent-400">20+</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Years</div></div>
-              <div class="text-center"><div class="text-2xl font-black text-accent-400">7</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Services</div></div>
-              <div class="text-center"><div class="text-2xl font-black text-accent-400">9</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Home Models</div></div>
-              <div class="text-center"><div class="text-2xl font-black text-accent-400">BC</div><div class="text-[10px] text-white/50 font-bold uppercase mt-1">Province-Wide</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Services grid — prominent, with full photos & descriptions -->
-        <div class="p-5 md:p-8">
-          <div class="text-center mb-8">
-            <h3 class="text-xl md:text-2xl font-black text-navy-700 tracking-tight">What We Build &amp; How We Deliver</h3>
-            <p class="text-slate-500 text-sm mt-1 max-w-xl mx-auto">Fast, reliable construction services for commercial property owners, developers, and incoming tenants.</p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <!-- Management & Consulting -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/management.jpg" alt="Management and Consulting" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Management &amp; Consulting</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Experienced oversight and consulting for owners, developers, and builders on retail tenant improvements, commercial projects, and multi-unit renovations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Project Oversight</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Trade Coordination</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Scheduling</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Safety Compliance</span></div></div></div>
-            <!-- Tenant Improvements -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/tenant-improvements.jpg" alt="Tenant Improvements" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Tenant Improvements</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Fast, reliable tenant improvements for restaurants, retail, office, medical, and industrial spaces. From basic refreshes to complete build-outs with tight lease deadlines.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Demolition &amp; Reconfig</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Framing &amp; Drywall</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">T-Bar Ceilings</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Flooring &amp; Millwork</span></div></div></div>
-            <!-- Renovations -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/renovations.jpg" alt="Renovations" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Renovations</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Full interior remodels, layout changes, cosmetic upgrades, structural updates, and code-compliant improvements with precision planning and minimal disruption to tenants or operations.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Kitchens &amp; Bathrooms</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Framing &amp; Layout</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Drywall &amp; Paint</span><span class="text-[10px] bg-earth-50 text-navy-600 font-bold px-2 py-1 rounded">Heritage Spaces</span></div></div></div>
-            <!-- Finishing Carpentry -->
-            <div class="service-card"><div class="h-52 overflow-hidden"><img src="images/contracting/finishing-carpentry.jpg" alt="Finishing Carpentry" class="w-full h-full object-cover"></div><div class="p-5"><h4 class="font-extrabold text-navy-700 text-lg mb-2">Finishing Carpentry</h4><p class="text-sm text-slate-500 leading-relaxed mb-3">Trim, baseboards, crown moulding, doors, casings, and custom detailing with exact measurements, clean miters, and seamless integration to elevate interiors.</p><div class="flex flex-wrap gap-1.5"><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Trim &amp; Baseboards</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Crown Moulding</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Door &amp; Window Casings</span><span class="text-[10px] bg-accent-50 text-accent-700 font-bold px-2 py-1 rounded">Custom Detailing</span></div></div></div>
-          </div>
-
-          <!-- Row 2: remaining 3 services -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-5">
-            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/maintenance.jpg" alt="Maintenance" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Maintenance</h4><p class="text-xs text-slate-500 leading-relaxed">Preventative inspections, seasonal upkeep, general repairs, safety &amp; code checks, and trade coordination. Local. Reliable. On Call.</p></div></div>
-            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/millwork.jpg" alt="Custom Millwork" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Custom Millwork</h4><p class="text-xs text-slate-500 leading-relaxed">Custom trim &amp; profiles, wall panels, built-in shelving, door &amp; window casings, reception desks — precise fits, clean lines, tight joints.</p></div></div>
-            <div class="service-card"><div class="h-40 overflow-hidden"><img src="images/contracting/bin-service.jpg" alt="Bin &amp; Waste Services" class="w-full h-full object-cover"></div><div class="p-4"><h4 class="font-extrabold text-navy-700 text-sm mb-1">Bin &amp; Waste Services</h4><p class="text-xs text-slate-500 leading-relaxed">Construction waste, demolition debris, drywall disposal, and regulated waste streams. Hazardous materials managed with licensed providers.</p></div></div>
-          </div>
-        </div>
-      </section>
 
     </div>
 
@@ -1096,7 +1211,7 @@
     <div class="max-w-6xl mx-auto px-6 py-10">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="md:col-span-2">
-          <div class="mb-4"><div class="bg-white rounded-xl p-1.5 inline-block mb-2"><img src="images/logo-vcc.png" alt="VIC Coast Contracting LTD" class="h-14 w-auto"></div><div class="text-[10px] text-white/40 font-bold uppercase tracking-wider">Colwood, BC · Family Owned · 20+ Years</div></div>
+          <div class="mb-4"><img src="images/logo-vcc.png" alt="VIC Coast Contracting LTD" class="h-16 w-auto opacity-90 mb-2"><div class="text-[10px] text-white/40 font-bold uppercase tracking-wider">Colwood, BC · Family Owned · 20+ Years</div></div>
           <p class="text-white/50 text-xs leading-relaxed max-w-sm">Family-owned and operated with over 20 years experience in multi-unit residential, retail &amp; commercial construction. Serving Greater Victoria and all of British Columbia.</p>
         </div>
         <div><h4 class="font-extrabold text-white text-xs uppercase tracking-wider mb-4">Services</h4><ul class="space-y-2"><li><a href="#" class="text-white/50 text-xs hover:text-accent-400 transition-colors" onclick="switchSection('contracting')">Contracting</a></li><li><a href="#" class="text-white/50 text-xs hover:text-accent-400 transition-colors" onclick="switchSection('housing')">Affordable Housing</a></li><li><a href="#" class="text-white/50 text-xs hover:text-accent-400 transition-colors" onclick="switchSection('storage')">Storage Rentals</a></li></ul></div>
@@ -1544,20 +1659,29 @@
       window.location.href=mailtoLink;
     }
 
-    function toggleServices(tab){
-      document.getElementById('homeownerSvcs').style.display=tab==='homeowner'?'grid':'none';
-      document.getElementById('businessSvcs').style.display=tab==='business'?'grid':'none';
-      document.querySelectorAll('.svc-toggle-btn').forEach(b=>b.classList.remove('active'));
-      document.querySelectorAll('.svc-toggle-btn').forEach(b=>{
-        if((tab==='homeowner'&&b.textContent.includes('Homeowners'))||(tab==='business'&&b.textContent.includes('Businesses'))){
-          b.classList.add('active');
-          b.style.background='#2D3A3E';
-          b.style.color='#fff';
-        }else{
-          b.style.background='transparent';
-          b.style.color='#64748b';
-        }
+    function startQuoteFor(type, service){
+      // Pre-fill the quote form and scroll to it
+      quoteData.type = type;
+      quoteData.service = service;
+      // Set the type in step 1
+      document.querySelectorAll('#quoteStep1 .type-card').forEach(c => c.classList.remove('selected'));
+      const typeMap = {homeowner: 0, business: 1};
+      const typeCards = document.querySelectorAll('#quoteStep1 .type-card');
+      if(typeCards[typeMap[type]]) typeCards[typeMap[type]].classList.add('selected');
+      // Show correct service list
+      document.getElementById('homeownerServices').style.display = type === 'homeowner' ? 'grid' : 'none';
+      document.getElementById('businessServices').style.display = type === 'business' ? 'grid' : 'none';
+      // Select the service in step 2
+      document.querySelectorAll('#quoteStep2 .service-option').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('#quoteStep2 .service-option').forEach(c => {
+        if(c.getAttribute('onclick') && c.getAttribute('onclick').includes("'" + service + "'")) c.classList.add('selected');
       });
+      // Jump to step 3 (project details) since type and service are pre-filled
+      quoteGoTo(3);
+      // Scroll to the form
+      setTimeout(() => {
+        document.getElementById('quote-form').scrollIntoView({behavior:'smooth'});
+      }, 100);
     }
 
     function scrollToAnchor(anchorId){
@@ -1567,7 +1691,7 @@
         setTimeout(()=>{
           document.querySelectorAll('.sub-nav-btn').forEach(b=>b.classList.remove('active'));
           document.querySelectorAll('.sub-nav-btn').forEach(b=>{
-            if((anchorId==='quote-form'&&b.textContent.includes('Quote'))||(anchorId==='services-section'&&b.textContent.includes('Services'))||(anchorId==='projects'&&b.textContent.includes('Projects'))){
+            if((anchorId==='quote-form'&&b.textContent.includes('Quote'))||(anchorId==='services-section'&&b.textContent.includes('Services'))||(anchorId==='projects'&&b.textContent.includes('Work'))){
               b.classList.add('active');
             }
           });
